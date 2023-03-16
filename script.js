@@ -1,31 +1,73 @@
-var shoppingFormEl = $('#shopping-form');
-var shoppingListEl = $('#shopping-list');
+var cityFormEl = $('#searchPortion');
+var cityListEl = $('#city-list');
+var cityItem = $('input[name="city-input"]').val();
+var apiKey = "59b309f78fc5600673173353d4d9796f"
+var dataSpit = $(".dataSpit")
+let temperature = ""
+let humidity = ""
+let windSpeed = ""
+var fullWeather = "https://api.openweathermap.org/data/2.5/weather?q=" +
+cityItem +
+"&appid=" +
+apiKey +
+"&units=imperial";
 
 function handleFormSubmit(event) {
   event.preventDefault();
 
-  var shoppingItem = $('input[name="shopping-input"]').val();
+  var cityItem = $('input[name="city-input"]').val();
 
-  if (!shoppingItem) {
-    console.log('No shopping item filled out in form!');
+
+  var fullWeather = "https://api.openweathermap.org/data/2.5/weather?q=" +
+  cityItem +
+  "&appid=" +
+  apiKey +
+  "&units=imperial";
+
+  var fullWeather = fetch(fullWeather, {
+    // The browser fetches the resource from the remote server without first looking in the cache.
+    // The browser will then update the cache with the downloaded resource.
+    cache: 'reload',
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+    //    temperature = data.main.temp;
+    //    humidity = data.main.humidity;
+    //    windSpeed = data.wind.speed;
+    let myData = (data.main.temp)
+    dataSpit.text(myData)
+        console.log(data);
+    });
+  console.log(fullWeather)
+
+  
+
+  if (!cityItem) {
+    console.log('No city in form!');
     return;
-  }
+  } 
+// else {
+//     dataSpit + fullWeathers.textContent
 
-  var shoppingListItemEl = $(
-    '<li class="flex-row justify-space-between align-center p-2 bg-light text-dark">'
+//   }
+
+  var cityListItemEl = $(
+    '<li class="">'
   );
-  shoppingListItemEl.text(shoppingItem);
+  cityListItemEl.text(cityItem);
 
   // add delete button to remove shopping list item
-  shoppingListItemEl.append(
-    '<button class="btn btn-danger btn-small delete-item-btn">Remove</button>'
+  cityListItemEl.append(
+    '<button class="delete-item-btn">Remove</button>'
   );
 
   // print to the page
-  shoppingListEl.append(shoppingListItemEl);
+  cityListEl.append(cityListItemEl);
 
   // clear the form input element
-  $('input[name="shopping-input"]').val('');
+  $('input[name="city-input"]').val('');
 }
 
 function handleRemoveItem(event) {
@@ -37,5 +79,24 @@ function handleRemoveItem(event) {
 }
 
 // use event delegation on the `shoppingListEl` to listen for click on any element with a class of `delete-item-btn`
-shoppingListEl.on('click', '.delete-item-btn', handleRemoveItem);
-shoppingFormEl.on('submit', handleFormSubmit);
+cityListEl.on('click', '.delete-item-btn', handleRemoveItem);
+cityFormEl.on('submit', handleFormSubmit);
+
+
+
+fullWeathers = fetch(fullWeather, {
+    // The browser fetches the resource from the remote server without first looking in the cache.
+    // The browser will then update the cache with the downloaded resource.
+    cache: 'reload',
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+  console.log(fullWeather)
+
+
+
+// API Link api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={59b309f78fc5600673173353d4d9796f}

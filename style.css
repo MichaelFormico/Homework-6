@@ -1,9 +1,12 @@
-main {
-    margin: 3rem auto;
-    max-width: 90vw;
-    width: 50ch;
-  }
+/* .container {
+  border-style: double;
+  margin-right: 80%;
+  } */
   
+hr {
+  margin-bottom: 20px;
+  }
+
   ul {
     margin: 3rem auto;
     font-size: 1.75rem;
@@ -13,5 +16,8 @@ main {
   
   ul li {
     margin: 1.2rem 0;
+    flex: row;
+    justify: space-between;
+    align: center; 
   }
   
