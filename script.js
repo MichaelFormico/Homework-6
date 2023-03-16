@@ -33,10 +33,10 @@ function handleFormSubmit(event) {
       return response.json();
     })
     .then(function (data) {
-    //    temperature = data.main.temp;
-    //    humidity = data.main.humidity;
-    //    windSpeed = data.wind.speed;
-    let myData = (data.main.temp)
+       temperature = (data.main.temp);
+       humidity = (data.main.humidity);
+       windSpeed = (data.wind.speed);
+    let myData = temperature + ' temperature ' + humidity + ' humidity ' + windSpeed + ' windspeed '
     dataSpit.text(myData)
         console.log(data);
     });
